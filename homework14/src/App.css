@@ -42,6 +42,72 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 20vw;
+  height: 30vw;
   flex-wrap: wrap;
+}
+
+.Footer {
+  padding: 80px 20px 60px;
+  color: rgb(226, 226, 226);
+  background-color: rgb(22, 22, 22);
+  display: flex;
+  gap: 30px;
+}
+
+.FooterIcons {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.FooterIcons li {
+  padding-right: 10px;
+  list-style-type: none;
+}
+
+.TextContainer {
+  width: 58%;
+  text-align: left;
+}
+
+.TextContainer a {
+  margin-right: 20px;
+  color: rgb(226, 226, 226);
+  text-decoration: none;
+}
+
+.TextContainer a:hover {
+  text-decoration: underline;
+}
+
+.IconsContainer {
+  text-align: left;
+}
+
+.IconsContainer p {
+  justify-content: left;
+  padding-left: 30px;
+}
+
+.FooterIcons a {
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  text-align: center;
+  line-height: 40px;
+  background: rgb(39, 39, 39);
+  border-radius: 50%;
+  font-size: 20px;
+  color: #fff;
+}
+
+.WatchitApp {
+  text-align: left;
+  margin-left: 30px;
+}
+
+.DownloadIcons {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding-top: 0;
 }

@@ -1,7 +1,13 @@
 import './App.css';
 import NavMenu from './Components/NavMenu/NavMenu';
-import { Grid } from '@mui/material';
 import SingleCard from './Components/SingleCard/SingleCard';
+
+import IconFacebook from './icons/facebook.png'
+import IconGoogle from './icons/google.png'
+import IconTwitter from './icons/twitter.png'
+import IconGit from './icons/github.png'
+import IconGooglePlay from './icons/gp.png'
+import IconAppStore from './icons/app_store.png'
 
 const mockData = [
   { id: 1, name: 'Home Alone', image: 'https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/CA2CD3523D0C3EE7C6D7FAE38D97BD2C5F649358E28003E1CB10D008ECB9E6EB/scale?width=1200&amp;aspectRatio=1.78&amp;format=webp', time: '1hr: 50mins' },
@@ -31,6 +37,41 @@ function App() {
             />
         ))}
       </div>
+      <footer className='Footer'>
+        <div className='TextContainer'>
+          <div className='SpecialText'>
+            <a href="#"><span>Terms Of Use</span></a>
+            <a href="#"><span>Privacy-Policy</span></a>
+            <a href="#"><span>FAQ</span></a>
+            <a href="#"><span>Watch List</span></a>
+          </div>
+          <p>@ 2023 WATCHIT. All rights reserved. All videos and shows on this platform are trademarks of, and all related images and content are the property of, Streamit, Inc. Duplication and copy of this is strictly prohibited. All rights reserved.</p>
+        </div>
+        <div className='IconsContainer'>
+          <p>Folow us:</p>
+          <ul className='FooterIcons'>
+            <li>
+              <a href="#"><img src={IconFacebook} alt="#" /></a>
+            </li>
+            <li>
+            <a href="#"><img src={IconGoogle} alt="#" /></a>
+            </li>
+            <li>
+            <a href="#"><img src={IconTwitter} alt="#" /></a>
+            </li>
+            <li>
+            <a href="#"><img src={IconGit} alt="#" /></a>
+            </li>
+          </ul>
+        </div>
+        <div className='WatchitApp'>
+          <p>Watchit App</p>
+            <div className='DownloadIcons'>
+              <a href='#'><img src={IconGooglePlay} alt="GooglePlay" /></a>
+              <a href='#'><img src={IconAppStore} alt="AppStore" /></a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
