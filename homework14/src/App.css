@@ -44,14 +44,16 @@
   align-items: center;
   height: 30vw;
   flex-wrap: wrap;
+  position: relative;
 }
 
 .Footer {
-  padding: 80px 20px 60px;
+  padding: 80px 30px 10px;
   color: rgb(226, 226, 226);
   background-color: rgb(22, 22, 22);
   display: flex;
   gap: 30px;
+  position: relative;
 }
 
 .FooterIcons {

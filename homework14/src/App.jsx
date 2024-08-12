@@ -1,6 +1,8 @@
 import './App.css';
 import NavMenu from './Components/NavMenu/NavMenu';
 import SingleCard from './Components/SingleCard/SingleCard';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 import IconFacebook from './icons/facebook.png'
 import IconGoogle from './icons/google.png'
@@ -8,17 +10,33 @@ import IconTwitter from './icons/twitter.png'
 import IconGit from './icons/github.png'
 import IconGooglePlay from './icons/gp.png'
 import IconAppStore from './icons/app_store.png'
-
-const mockData = [
-  { id: 1, name: 'Home Alone', image: 'https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/CA2CD3523D0C3EE7C6D7FAE38D97BD2C5F649358E28003E1CB10D008ECB9E6EB/scale?width=1200&amp;aspectRatio=1.78&amp;format=webp', time: '1hr: 50mins' },
-  { id: 2, name: 'Black Adam', image: 'https://m.media-amazon.com/images/S/pv-target-images/8512ded1639be52f10cd3a86dfa1c15431f0e0fdcc8199a6fcd9085e0dbc993f._SX1080_FMjpg_.jpg', time: '2hr: 10mins' },
-  { id: 3, name: 'Back to the Future', image: 'https://deadline.com/wp-content/uploads/2022/07/1A26A865-13F9-4E64-87D3-DC7845F3F4BD.jpeg?w=681&h=383&crop=1', time: '2hr: 50mins' },
-  { id: 4, name: 'Avengers', image: 'https://cdn.britannica.com/60/182360-050-CD8878D6/Avengers-Age-of-Ultron-Joss-Whedon.jpg', time: '2hr: 30mins' },
-];
+import { Grid, TextField } from '@mui/material';
 
 function App() {
+  const [data, setData] = useState([]);
+  const [search, setSearch] = useState('');
+
+  useEffect(() => {
+    const handleRequest = async() => {
+      const response = await axios.get(`https://api.tvmaze.com/search/shows?q=${search}`);
+      setData(response.data);
+      console.log(response);
+    }
+    if(search.length >= 3) {
+      handleRequest();
+    }
+
+    if(search.length === 0) {
+      setData([]);
+    }
+  }, [search]);
+  
   const handleCardClick = (id) => {
     console.log(`Film ID: ${id}`);
+  };
+
+  const handleSearch = (event) => {
+    setSearch(event.target.value);
   };
   
   return (
@@ -26,16 +44,27 @@ function App() {
       <header>
         <NavMenu />
       </header>
+      <Grid item xs={12} style={{marginTop: '30px'}}>
+          <TextField
+            id="outlined-controlled"
+            label="Search"
+            value={search}
+            onChange={handleSearch}
+          />
+      </Grid>
       <div className='SingleCard'>
-        {mockData.map((film) => (
+        {data.map((responseShow, index) => {
+            const {score, show} = responseShow;
+            return (
             <SingleCard
-              id={film.id}
-              name={film.name}
-              time={film.time}
-              image={film.image}
+              name={show.name}
+              description={show.summary}
+              image={show.image?.original ?? ""}
+              status={show.status}
               handleClick={handleCardClick}
             />
-        ))}
+            )
+        })}
       </div>
       <footer className='Footer'>
         <div className='TextContainer'>
