@@ -2,7 +2,6 @@ import './App.css';
 import NavMenu from './Components/NavMenu/NavMenu';
 import SingleCard from './Components/SingleCard/SingleCard';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 
 import IconFacebook from './icons/facebook.png'
 import IconGoogle from './icons/google.png'
@@ -11,26 +10,11 @@ import IconGit from './icons/github.png'
 import IconGooglePlay from './icons/gp.png'
 import IconAppStore from './icons/app_store.png'
 import { Grid, TextField } from '@mui/material';
+import useRequest from './hooks/useRequest';
 
 function App() {
-  const [data, setData] = useState([]);
   const [search, setSearch] = useState('');
-
-  useEffect(() => {
-    const handleRequest = async() => {
-      const response = await axios.get(`https://api.tvmaze.com/search/shows?q=${search}`);
-      setData(response.data);
-      console.log(response);
-    }
-    if(search.length >= 3) {
-      handleRequest();
-    }
-
-    if(search.length === 0) {
-      setData([]);
-    }
-  }, [search]);
-  
+  const data = useRequest(`https://api.tvmaze.com/search/shows?q=${search}`, search);
   const handleCardClick = (id) => {
     console.log(`Film ID: ${id}`);
   };
@@ -44,7 +28,7 @@ function App() {
       <header>
         <NavMenu />
       </header>
-      <Grid item xs={12} style={{marginTop: '30px'}}>
+      <Grid item xs={12} style={{margin: '30px 0'}}>
           <TextField
             id="outlined-controlled"
             label="Search"
@@ -66,7 +50,7 @@ function App() {
             )
         })}
       </div>
-      <footer className='Footer'>
+      <footer>
         <div className='TextContainer'>
           <div className='SpecialText'>
             <a href="#"><span>Terms Of Use</span></a>

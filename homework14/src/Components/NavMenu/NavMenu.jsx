@@ -8,13 +8,25 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import logo from './logo.png';
+import { NavLink } from 'react-router-dom';
 
-const pages = ['Home', 'TV Shows', 'About Us'];
+const pages = [{
+        name: 'Home',
+        link: 'home',
+    },
+    {
+        name: 'Films',
+        link: 'films',
+    },
+    {
+        name: 'Saved films',
+        link: 'savedFilms'
+    },
+];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function NavMenu() {
@@ -96,9 +108,9 @@ function NavMenu() {
                     display: { xs: 'block', md: 'none' },
                 }}
                 >
-                {pages.map((page) => (
-                    <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page}</Typography>
+                {pages.map(({ name, link }) => (
+                    <MenuItem key={link} onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">{name}</Typography>
                     </MenuItem>
                 ))}
                 </Menu>
@@ -123,14 +135,16 @@ function NavMenu() {
                 LOGO
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                {pages.map((page) => (
-                <Button
-                    key={page}
-                    onClick={handleCloseNavMenu}
-                    sx={{ my: 2, color: '#f30000', display: 'block' }}
-                >
-                    {page}
-                </Button>
+                {pages.map(({ name, link }) => (
+                <NavLink to={link} style={({isActive}) => {
+                    return {
+                        textDecoration: 'none',
+                        margin: '0 10px',
+                        color: isActive 
+                        ? '#eb0000'
+                        : '#d6d4d4'
+                    }
+                }}>{name}</NavLink>
                 ))}
             </Box>
 
