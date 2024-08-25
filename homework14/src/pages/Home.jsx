@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { FilmContext } from '../context/FilmsContext';
 import Footer from '../Components/Footer/Footer';
 
+
 function App() {
     const { search, setSearch, data } = useContext(FilmContext);
     const navigate = useNavigate();
@@ -21,6 +22,9 @@ function App() {
     
     return (
         <div className="App">
+            <Grid item xs={12} sx={{height: '100vh', border: '1px solid orange'}}>
+
+            </Grid>
             <Grid item xs={12} style={{margin: '30px 0'}}>
                 <Box display={'flex'} justifyContent={'center'}>
                     <TextField
