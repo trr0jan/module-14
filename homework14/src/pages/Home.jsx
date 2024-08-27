@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { FilmContext } from '../context/FilmsContext';
 import Footer from '../Components/Footer/Footer';
 
+
 function App() {
     const { search, setSearch, data } = useContext(FilmContext);
     const navigate = useNavigate();

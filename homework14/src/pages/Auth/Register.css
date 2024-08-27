@@ -1,0 +1,29 @@
+body {
+    background-color:  rgb(26, 26, 26);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.register-input {
+    border: 1px solid rgb(179, 179, 179);
+    border-radius: 2px;
+    height: 35px;
+}
+
+.register-button {
+    background: none;
+    border: none;
+    color: #DF706A;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 600;
+    padding-top: 10px;
+}
+
+.register-button:hover {
+    color: #d14942;
+}
