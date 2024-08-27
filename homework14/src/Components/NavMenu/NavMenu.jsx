@@ -12,7 +12,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import logo from './logo.png';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const pages = [{
         name: 'Home',
@@ -23,15 +23,20 @@ const pages = [{
         link: 'films',
     },
     {
+        name: 'Popular shows',
+        link: 'popular'
+    },
+    {
         name: 'Saved films',
         link: 'savedFilms'
     },
 ];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Logout'];
 
 function NavMenu() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const navigate = useNavigate();
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -46,6 +51,11 @@ function NavMenu() {
 
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
+    };
+
+    const handleLogout = () => {
+        localStorage.removeItem('accessToken');
+        navigate('/auth/login');
     };
 
     return (
@@ -171,7 +181,7 @@ function NavMenu() {
                 onClose={handleCloseUserMenu}
                 >
                 {settings.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                    <MenuItem key={setting} onClick={handleLogout}>
                     <Typography textAlign="center">{setting}</Typography>
                     </MenuItem>
                 ))}
@@ -183,5 +193,3 @@ function NavMenu() {
     );
 }
 export default NavMenu;
-
-

@@ -12,7 +12,7 @@ const NotFound = () => {
             justifyContent={'center'} 
             alignItems={'center'}
         >
-            <Typography>This page bot found</Typography>
+            <Typography>This page not found</Typography>
             <Link to='/home'>Back to Home</Link>
         </Box>
     );
