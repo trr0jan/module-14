@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { Button } from '@mui/material';
 import './TitleSingleSlide.css';
+import { useNavigate } from "react-router-dom";
 
 export default function Slider() {
   const [shows, setShows] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch('https://api.tvmaze.com/shows?_embed=cast')
@@ -39,13 +42,13 @@ export default function Slider() {
               <h1>{show.name.toUpperCase()}</h1>
               <p className="description">{truncateText(show.summary, 200)}</p>
 
-              {show._embedded?.cast && show._embedded.cast.length > 0 && (
+              {show._embedded?.cast?.length > 0 && (
                 <p className="starring">
                   <strong className="sectionName">Starring:</strong> {show._embedded.cast.map(actor => actor.person.name).join(', ')}
                 </p>
               )}
 
-              {show.genres && show.genres.length > 0 && (
+              {show.genres?.length > 0 && (
                 <p className="genres">
                   <strong className="sectionName">Genres:</strong> {show.genres.join(', ')}
                 </p>
@@ -56,6 +59,21 @@ export default function Slider() {
                   <strong className="sectionName">Tag:</strong> {show.tags.join(', ')}
                 </p>
               )}
+            <Button
+              onClick={() => navigate(`/films/${show.id}`)}
+              style={{
+                border: '1px solid #E50914',
+                borderRadius: '0',
+                background: '#E50914',
+                width: '110px',
+                height: '30px',
+                color: '#fff',
+                textTransform: 'none'
+              }}
+            >
+              Show more
+            </Button>
+
             </div>
           </div>
         ))}

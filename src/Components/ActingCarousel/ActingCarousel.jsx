@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
-import "./Carousel.css";
+import "./ActingCarousel.css";
 
-const Carousel = ({ title, items, onClick, onViewAll }) => {
+const ActingCarousel = ({ title, items, onClick, onViewAll }) => {
     const rowRef = useRef();
 
     const scrollLeft = () => {
@@ -19,11 +19,6 @@ const Carousel = ({ title, items, onClick, onViewAll }) => {
                 <div className="title">
                     <h2>{title}</h2>
                 </div>
-
-                
-                <a className="view-all" href="/films">
-                    View All
-                </a>
             </div>
 
             <div className="carousel-arrow left" onClick={scrollLeft}>❮</div>
@@ -56,10 +51,6 @@ const Carousel = ({ title, items, onClick, onViewAll }) => {
                                             .padStart(2, "0")} min`
                                         : "1 hr : 30 min"}
                                 </p>
-
-                                <button className="show-more">
-                                    Show More
-                                </button>
                             </div>
                         </div>
                     </div>
@@ -70,4 +61,4 @@ const Carousel = ({ title, items, onClick, onViewAll }) => {
     );
 };
 
-export default Carousel;
+export default ActingCarousel;

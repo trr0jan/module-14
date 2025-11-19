@@ -57,12 +57,10 @@ function NavMenu() {
 
     return (
         <>
-        {/* ================= NAVBAR ================= */}
         <AppBar position="static" sx={{ backgroundColor: 'black' }}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
 
-                    {/* LOGO */}
                     <Box
                         component="img"
                         sx={{ height: 40, display: { xs: 'none', md: 'flex' }, mr: 1 }}
@@ -70,13 +68,8 @@ function NavMenu() {
                         src={logo}
                     />
 
-                    {/* MOBILE BURGER */}
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-                        <IconButton
-                            size="large"
-                            onClick={handleOpenNavMenu}
-                            color="inherit"
-                        >
+                        <IconButton size="large" onClick={handleOpenNavMenu} color="inherit">
                             <MenuIcon />
                         </IconButton>
 
@@ -84,8 +77,6 @@ function NavMenu() {
                             anchorEl={anchorElNav}
                             open={Boolean(anchorElNav)}
                             onClose={handleCloseNavMenu}
-                            anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-                            transformOrigin={{ vertical: 'top', horizontal: 'left' }}
                         >
                             {pages.map(({ name, link }) => (
                                 <MenuItem key={link} onClick={handleCloseNavMenu}>
@@ -97,7 +88,6 @@ function NavMenu() {
 
                     <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
 
-                    {/* PAGES (PC) */}
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map(({ name, link }) => (
                             <NavLink
@@ -114,7 +104,6 @@ function NavMenu() {
                         ))}
                     </Box>
 
-                    {/* SEARCH INPUT */}
                     <input
                         type="text"
                         placeholder="Search…"
@@ -130,7 +119,6 @@ function NavMenu() {
                         }}
                     />
 
-                    {/* USER AVATAR */}
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -143,8 +131,6 @@ function NavMenu() {
                             anchorEl={anchorElUser}
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
-                            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-                            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
                         >
                             {settings.map((setting) => (
                                 <MenuItem key={setting} onClick={handleLogout}>
@@ -157,7 +143,7 @@ function NavMenu() {
             </Container>
         </AppBar>
 
-        {/* ================= SEARCH OVERLAY ================= */}
+        {/* SEARCH RESULTS */}
         {results.length > 0 && (
             <Box
                 sx={{
@@ -183,6 +169,11 @@ function NavMenu() {
                             gap: "15px",
                             alignItems: "center",
                             cursor: "pointer",
+                        }}
+                        onClick={() => {
+                            navigate(`/films/${item.show.id}`);
+                            setResults([]);
+                            setSearch("");
                         }}
                     >
                         <img

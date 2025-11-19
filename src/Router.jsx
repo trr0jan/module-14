@@ -1,6 +1,6 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
-import Main from './layout/Main'
-import Home from './pages/Home'
+import Main from './layout/Main';
+import Home from './pages/Home';
 import Films from "./pages/Films";
 import NotFound from "./pages/NotFound";
 import SingleFilm from "./pages/SingleFilm";
@@ -8,13 +8,13 @@ import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import Auth from "./layout/Auth";
 import PopularShows from "./pages/PopularShows";
+import SingleActor from "./pages/SingleActor";
 
 const PrivateRoute = ({children}) => {
     const accessToken = localStorage.getItem('accessToken');
     if(!accessToken) {
         return <Navigate to='/auth/login' />;
     }
-
     return children;
 };
 
@@ -25,8 +25,8 @@ const router = createBrowserRouter([
         errorElement: <NotFound />,
         children: [
             {
-                index: true, // <-- при заходе на /
-                element: <Navigate to="/home" replace />, // <-- редирект на /home
+                index: true,
+                element: <Navigate to="/home" replace />,
             },
             {
                 path: "/home",
@@ -52,6 +52,14 @@ const router = createBrowserRouter([
                     </PrivateRoute>
                 ),
             },
+            {
+                path: "/actors/:actorId",
+                element: (
+                    <PrivateRoute>
+                    <SingleActor />
+                    </PrivateRoute>
+                ),
+            }
         ],
     },
     {
@@ -69,6 +77,5 @@ const router = createBrowserRouter([
         ],
     },
 ]);
-
 
 export default router;
