@@ -1,0 +1,145 @@
+.carousel-wrapper {
+    position: relative;
+    width: 100%;
+    padding: 50px 0;
+}
+
+.carousel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px;
+    margin-bottom: 15px;
+}
+
+.title h2 {
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 26px;
+}
+
+/* View All button */
+.view-all {
+    background: none;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 2px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.view-all {
+    text-decoration: none;
+}
+
+.view-all:hover {
+    background: #1f1f1f;
+}
+
+/* Arrows */
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-15%);
+    background: rgba(0, 0, 0, 0.6);
+    width: 45px;
+    height: 120px;
+    border-radius: 1px;
+    font-size: 28px;
+    color: white;
+    cursor: pointer;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.25s;
+}
+
+.carousel-arrow.left {
+    left: 20px;
+}
+
+.carousel-arrow.right {
+    right: 20px;
+}
+
+.carousel-arrow:hover {
+    background: rgba(0, 0, 0, 0.85);
+}
+
+/* Row */
+.carousel-row {
+    display: flex;
+    overflow-x: hidden;
+    gap: 40px;
+    padding-left: 50px;
+}
+
+/* Movie cards */
+.movie-card {
+    min-width: 360px;
+    height: 210px;
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+    background: #000;
+    cursor: pointer;
+}
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Overlay */
+.card-overlay {
+    align-items: flex-start;
+    text-align: left;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(to right, rgba(0,0,0,0.86) 15%, rgba(0,0,0,0) 100%);
+    padding: 20px;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    color: white;
+}
+
+.card-overlay h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.card-overlay p {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+/* Show More button */
+.show-more {
+    margin-top: 10px;
+    background: #e50914;
+    border: none;
+    padding: 8px 18px;
+    color: white;
+    font-size: 13px;
+    cursor: pointer;
+    border-radius: 1px;
+    align-self: flex-start;
+}
+
+.show-more:hover {
+    background: #b30000;
+}
