@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import "./Carousel.css";
+import { Link } from "react-router-dom";
 
 const Carousel = ({ title, items, onClick, onViewAll }) => {
     const rowRef = useRef();
@@ -19,11 +20,10 @@ const Carousel = ({ title, items, onClick, onViewAll }) => {
                 <div className="title">
                     <h2>{title}</h2>
                 </div>
-
                 
-                <a className="view-all" href="/films">
+                <Link to="/films" className="view-all">
                     View All
-                </a>
+                </Link>
             </div>
 
             <div className="carousel-arrow left" onClick={scrollLeft}>❮</div>

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Typography, Box } from "@mui/material";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import './Login.css'
-import { Link } from "react-router-dom";
 
 const Login = () => {
     const [email, setEmail] = useState('');
