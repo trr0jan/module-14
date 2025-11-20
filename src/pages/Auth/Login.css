@@ -32,3 +32,16 @@ form {
 .login-button:hover {
     color: #dd4141;
 }
+
+.register-button1 {
+    text-align: center;
+    text-decoration: none;
+    font-size: 13px;
+    text-transform: none !important;
+    color: #ff4c4c;
+    margin-top: 10px;
+}
+
+.register-button1:hover {
+    color: #dd4141;
+}

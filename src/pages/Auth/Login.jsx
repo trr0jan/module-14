@@ -54,18 +54,21 @@ const Login = () => {
                         onChange={(e) => setEmail(e.target.value)}
                         type="email" 
                         name="email" 
-                        placeholder="Email"
+                        placeholder=""
                         className="login-input" 
                     />
                     <input 
                         onChange={(e) => setPassword(e.target.value)} 
                         type="password" 
                         name="password" 
-                        placeholder="Password"
+                        placeholder=""
                         className="login-input" 
                     />
                     {error && <Typography fontSize={'13px'}>Something went wrong</Typography>}
+                    
                     <input type="submit" value={'Login'} className="login-button" />
+                    
+                    <a href="/auth/registration" className="register-button1">Register?</a>
                 </form>
             </Box>
         </div>
