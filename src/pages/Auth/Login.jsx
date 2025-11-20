@@ -3,6 +3,7 @@ import { Typography, Box } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import './Login.css'
+import { Link } from "react-router-dom";
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -68,7 +69,9 @@ const Login = () => {
                     
                     <input type="submit" value={'Login'} className="login-button" />
                     
-                    <a href="/auth/registration" className="register-button1">Register?</a>
+                    <Link to="/auth/registration" className="register-button1">
+                        Register?
+                    </Link>
                 </form>
             </Box>
         </div>
