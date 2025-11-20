@@ -1,6 +1,6 @@
 .carousel-wrapper {
     position: relative;
-    width: 100%;
+    width: 98.2% !important;
     padding: 50px 0;
 }
 
@@ -61,7 +61,7 @@
 }
 
 .carousel-arrow.right {
-    right: 20px;
+    right: -10px !important;
 }
 
 .carousel-arrow:hover {
@@ -73,7 +73,7 @@
     display: flex;
     overflow-x: hidden;
     gap: 40px;
-    padding-left: 50px;
+    padding: 0 50px;
 }
 
 /* Movie cards */
