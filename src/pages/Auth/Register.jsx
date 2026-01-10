@@ -66,7 +66,7 @@ const Register = () => {
                     onChange={(e) => setEmail(e.target.value)} 
                     type="email" 
                     name="email"
-                    placeholder="" 
+                    placeholder="Email" 
                     className="register-input"
                 />
                 {errors.email && <Typography sx={{ fontSize: '12px', color: 'red', mb: 1 }}>{errors.email}</Typography>}
@@ -75,7 +75,7 @@ const Register = () => {
                     onChange={(e) => setPassword(e.target.value)} 
                     type="password" 
                     name="password"
-                    placeholder="" 
+                    placeholder="Password" 
                     className="register-input"
                 />
                 {errors.password && <Typography sx={{ fontSize: '12px', color: 'red', mb: 1 }}>{errors.password}</Typography>}
@@ -84,7 +84,7 @@ const Register = () => {
                     onChange={(e) => setConfirmPassword(e.target.value)} 
                     type="password" 
                     name="confirmPassword"
-                    placeholder="" 
+                    placeholder="Confirm password" 
                     className="register-input" 
                 />
                 {errors.confirmPassword && <Typography sx={{ fontSize: '12px', color: 'red', mb: 1 }}>{errors.confirmPassword}</Typography>}
