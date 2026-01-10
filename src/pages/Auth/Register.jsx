@@ -54,10 +54,12 @@ const Register = () => {
                 }
             );
 
-            if (response.status === 200) {
-
-                navigate("/home", { replace: true });
+            if (response.data?.accessToken) {
+                localStorage.setItem("accessToken", response.data.accessToken);
             }
+
+            navigate("/home", { replace: true });
+            
         } catch (error) {
             setErrors({
                 api:
