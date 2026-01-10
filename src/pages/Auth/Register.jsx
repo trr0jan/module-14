@@ -13,58 +13,43 @@ const Register = () => {
 
     const navigate = useNavigate();
 
-    const handleRegister = async (event) => {
-        event.preventDefault();
+    const handleRegister = async (e) => {
+        e.preventDefault();
         if (loading) return;
 
         const newErrors = {};
-
-        const trimmedEmail = email.trim();
-        const trimmedPassword = password.trim();
-        const trimmedConfirmPassword = confirmPassword.trim();
-
-        if (!trimmedEmail) {
-            newErrors.email = "Email is required";
-        } else if (trimmedEmail.length < 5) {
-            newErrors.email = "Email is too short";
-        }
-
-        if (!trimmedPassword) {
-            newErrors.password = "Password is required";
-        }
-
-        if (!trimmedConfirmPassword) {
-            newErrors.confirmPassword = "Confirm password is required";
-        } else if (trimmedPassword !== trimmedConfirmPassword) {
+        if (!email) newErrors.email = "Email required";
+        if (!password) newErrors.password = "Password required";
+        if (password !== confirmPassword)
             newErrors.confirmPassword = "Passwords do not match";
-        }
 
         setErrors(newErrors);
-
-        if (Object.keys(newErrors).length > 0) return;
+        if (Object.keys(newErrors).length) return;
 
         try {
             setLoading(true);
 
-            const response = await axios.post(
+            await axios.post(
                 "https://watchit-api.onrender.com/auth/signup",
-                {
-                    email: trimmedEmail,
-                    password: trimmedPassword,
-                }
+                { email, password }
             );
 
-            if (response.data?.accessToken) {
-                localStorage.setItem("accessToken", response.data.accessToken);
-            }
+            const loginResponse = await axios.post(
+                "https://watchit-api.onrender.com/auth/login",
+                { email, password }
+            );
+
+            localStorage.setItem(
+                "accessToken",
+                loginResponse.data.access_token
+            );
 
             navigate("/home", { replace: true });
-            
-        } catch (error) {
+        } catch (err) {
             setErrors({
                 api:
-                    error?.response?.data?.message ||
-                    "Something went wrong. Please try again.",
+                    err?.response?.data?.message ||
+                    "Registration failed",
             });
         } finally {
             setLoading(false);
@@ -97,61 +82,49 @@ const Register = () => {
                 </Typography>
 
                 <input
+                    className="register-input"
                     type="email"
                     name="email"
                     placeholder="Email"
-                    className="register-input"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     autoComplete="email"
                     autoCorrect="off"
                     autoCapitalize="none"
                     required
-                />
+/>
+
                 {errors.email && (
-                    <Typography sx={{ fontSize: "12px", color: "red", mb: 1 }}>
+                    <Typography fontSize="12px" color="red">
                         {errors.email}
                     </Typography>
                 )}
 
                 <input
-                    type="password"
-                    name="password"
-                    placeholder="Password"
                     className="register-input"
+                    type="password"
+                    placeholder="Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    autoComplete="new-password"
-                    autoCorrect="off"
-                    autoCapitalize="none"
-                    required
                 />
-                {errors.password && (
-                    <Typography sx={{ fontSize: "12px", color: "red", mb: 1 }}>
-                        {errors.password}
-                    </Typography>
-                )}
 
                 <input
-                    type="password"
-                    name="confirmPassword"
-                    placeholder="Confirm password"
                     className="register-input"
+                    type="password"
+                    placeholder="Confirm password"
                     value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    autoComplete="new-password"
-                    autoCorrect="off"
-                    autoCapitalize="none"
-                    required
+                    onChange={(e) =>
+                        setConfirmPassword(e.target.value)
+                    }
                 />
                 {errors.confirmPassword && (
-                    <Typography sx={{ fontSize: "12px", color: "red", mb: 1 }}>
+                    <Typography fontSize="12px" color="red">
                         {errors.confirmPassword}
                     </Typography>
                 )}
 
                 {errors.api && (
-                    <Typography sx={{ fontSize: "13px", color: "red", mb: 1 }}>
+                    <Typography fontSize="13px" color="red">
                         {errors.api}
                     </Typography>
                 )}
