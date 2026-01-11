@@ -111,7 +111,7 @@ function NavMenu() {
                         onChange={(e) => handleSearch(e.target.value)}
                         style={{
                             padding: "6px 10px",
-                            borderRadius: "6px",
+                            borderRadius: "2px",
                             border: "1px solid #555",
                             background: "#222",
                             color: "white",

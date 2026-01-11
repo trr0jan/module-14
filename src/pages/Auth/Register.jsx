@@ -17,10 +17,14 @@ const Register = () => {
         e.preventDefault();
         if (loading) return;
 
+        const cleanEmail = email.trim().toLowerCase();
+        const cleanPassword = password.trim();
+        const cleanConfirm = confirmPassword.trim();
+
         const newErrors = {};
-        if (!email) newErrors.email = "Email required";
-        if (!password) newErrors.password = "Password required";
-        if (password !== confirmPassword)
+        if (!cleanEmail) newErrors.email = "Email required";
+        if (!cleanPassword) newErrors.password = "Password required";
+        if (cleanPassword !== cleanConfirm)
             newErrors.confirmPassword = "Passwords do not match";
 
         setErrors(newErrors);
@@ -29,14 +33,22 @@ const Register = () => {
         try {
             setLoading(true);
 
+            // signup
             await axios.post(
                 "https://watchit-api.onrender.com/auth/signup",
-                { email, password }
+                {
+                    email: cleanEmail,
+                    password: cleanPassword,
+                }
             );
 
+            // login
             const loginResponse = await axios.post(
                 "https://watchit-api.onrender.com/auth/login",
-                { email, password }
+                {
+                    email: cleanEmail,
+                    password: cleanPassword,
+                }
             );
 
             localStorage.setItem(
@@ -46,10 +58,13 @@ const Register = () => {
 
             navigate("/home", { replace: true });
         } catch (err) {
+            console.error("AUTH ERROR:", err.response?.data);
+
             setErrors({
                 api:
-                    err?.response?.data?.message ||
-                    "Registration failed",
+                    err.response?.data?.message ||
+                    err.response?.data?.error ||
+                    "Authorization failed",
             });
         } finally {
             setLoading(false);
@@ -69,7 +84,11 @@ const Register = () => {
                 width: "270px",
             }}
         >
-            <form onSubmit={handleRegister} noValidate>
+            <form
+                onSubmit={handleRegister}
+                autoComplete="off"
+                noValidate
+            >
                 <Typography
                     sx={{
                         fontWeight: "bold",
@@ -84,21 +103,15 @@ const Register = () => {
                 <input
                     className="register-input"
                     type="email"
-                    name="email"
                     placeholder="Email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    autoComplete="email"
+                    autoComplete="off"
                     autoCorrect="off"
                     autoCapitalize="none"
+                    spellCheck={false}
                     required
-/>
-
-                {errors.email && (
-                    <Typography fontSize="12px" color="red">
-                        {errors.email}
-                    </Typography>
-                )}
+                />
 
                 <input
                     className="register-input"
@@ -106,6 +119,11 @@ const Register = () => {
                     placeholder="Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    autoComplete="new-password"
+                    autoCorrect="off"
+                    autoCapitalize="none"
+                    spellCheck={false}
+                    required
                 />
 
                 <input
@@ -116,7 +134,13 @@ const Register = () => {
                     onChange={(e) =>
                         setConfirmPassword(e.target.value)
                     }
+                    autoComplete="new-password"
+                    autoCorrect="off"
+                    autoCapitalize="none"
+                    spellCheck={false}
+                    required
                 />
+
                 {errors.confirmPassword && (
                     <Typography fontSize="12px" color="red">
                         {errors.confirmPassword}
